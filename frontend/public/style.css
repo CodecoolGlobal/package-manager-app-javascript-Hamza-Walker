@@ -4,7 +4,7 @@ body {
 .rectangle-div {
   position: absolute;
   width: 513px;
-  height: 740px;
+  height: 990px;
   background: #FFFFFF;
   border-radius: 5px;
   top: 50%;
@@ -17,7 +17,7 @@ body {
   width: 436px;
   height: 255px;
   background: #FFFFFF;
-  top: 50%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -29,7 +29,7 @@ body {
   top: 10%;
   margin: auto;
 
-  font-family: 'Montserrat', sans-serif;
+  font-family:  sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -59,6 +59,7 @@ body {
   border-radius: 5px;
 }
 .name-input::placeholder {
+
   font-family: 'Overpass';
   font-style: normal;
   font-weight: 400;
@@ -72,9 +73,9 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 44%;
   margin: auto;
-  width: 80%;
+  width: 81%;
   height: 50%;
   background: #FFFFFF;
   border: 1px solid #000000;
@@ -96,94 +97,151 @@ body {
   color: rgba(0, 0, 0, 0.5);
 }
 
-
-
-
-/* form {
-  position: relative;
-  width: 80%;
-  height: 80vh;
-}
-
-#root {
+.dependency-div {
   position: absolute;
-  width: 513px;
-  height: 990px;
-  left: 50%;
-  top: 50%;
+  width: 300px;
+  height: 246px;
+  left: 260px;
+  top: 44%;
   transform: translate(-50%, -50%);
 
-  background: #FFFFFF;
-  border-radius: 5px;
 }
 
-.details-div {
+.dependency-title{
   position: absolute;
-  width: 436px;
-  height: 255px;
-  left: 50%;
-  top: 10%;
-  transform: translateX(-50%);
-
-  background: #FFFFFF;
-  border-radius: 5px;
-} */
-
-
-/*
-h2.title {
-  font-family: Montserrat;
+  left: 0%;
+  right: 0%;
+  top: 26.32%;
+  bottom: 61.49%;
+  font-family: sans-serif;
   font-style: normal;
-  line-height: 22.5px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140.62%;
   text-align: center;
-  vertical-align: top;
-  letter-spacing: 30%;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #000000;
 }
-
-
-.name-input {
-  margin-bottom: 10px;
-  border: 1px solid black;
-}
-
-textarea {
-  margin-bottom: 10px;
-  border: 1px solid black;
-}
-
-.dependencies-title {
-  font-family: Montserrat;
-  font-style: normal;
-  line-height: 22.5px;
-  text-align: center;
-  vertical-align: top;
-  letter-spacing: 30%;
-}
-
-ul {
-  margin-bottom: 10px;
-  list-style-type: none;
-  padding-left: 0;
-}
-
-li {
+.package {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140.62%;
+  border-bottom:  1px solid #CCCCCC;
+
 }
 
-label {
-  margin-left: 10px;
-}
-
-button {
-  background-color: rgb(230, 8, 8);
-  border: none;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
+.remove-button {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid black;
+  color: black;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
   cursor: pointer;
+  margin-right: 10px;
 }
 
-button:hover {
-  background-color: gray;
+
+.remove-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.dependencySearch-input{
+  position: absolute;
+  left: -28px;
+  right: 0;
+  top: 66%;
+  margin: auto;
+  width: 115%;
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140.62%;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.packageVersion-title{
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 52.32%;
+  bottom: 61.49%;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140.62%;
+  text-align: center;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #000000;
+
+}
+
+.packageVersion-div{
+  position: absolute;
+  width: 300px;
+  height: 246px;
+  left: 260px;
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.package2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140.62%;
+  border-bottom:  1px solid #CCCCCC;
+}
+
+/* #rectangle-div .addVersion-button{
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid black;
+  color: black;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+#rectangle-div .version-Input{
+  position: absolute;
+  left: -28px;
+  right: 0;
+  top: 66%;
+  margin: auto;
+  width: 115%;
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140.62%;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  border-radius: 5px;
+
 } */

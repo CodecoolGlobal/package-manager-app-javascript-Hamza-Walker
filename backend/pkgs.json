@@ -2,7 +2,7 @@
 	"packages": [
 		{
 			"id": 1,
-			"name": "npm",
+			"name": "Npm",
 			"description": "",
 			"dependencies": [],
 			"releases": [
@@ -18,7 +18,7 @@
 		},
 		{
 			"id": 2,
-			"name": "express",
+			"name": "Express",
 			"description": "",
 			"dependencies": [1],
 			"releases": [
@@ -34,7 +34,7 @@
 		},
 		{
 			"id": 3,
-			"name": "busboy",
+			"name": "Busboy",
 			"description": "",
 			"dependencies": [1],
 			"releases": [
@@ -50,7 +50,7 @@
 		},
 		{
 			"id": 4,
-			"name": "express-fileupload",
+			"name": "Express - Fileupload",
 			"description": "",
 			"dependencies": [2,3],
 			"releases": [
@@ -66,7 +66,7 @@
 		},
 		{
 			"id": 5,
-			"name": "express-image-handler",
+			"name": "Express-Image-Handler",
 			"description": "",
 			"dependencies": [2,3],
 			"releases": [
@@ -82,7 +82,7 @@
 		},
 		{
 			"id": 6,
-			"name": "enzyme",
+			"name": "Enzyme",
 			"description": "",
 			"dependencies": [1],
 			"releases": [

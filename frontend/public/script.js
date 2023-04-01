@@ -1,150 +1,280 @@
-// const loadEvent = () => {
-//     const root = document.getElementById('root');
-//     root.classList.add('root');
+
   
-//     const form = document.createElement('form');
-//     form.action = '/edit/package';
-//     form.method = 'POST';
-//     form.classList.add('form');
-//     root.appendChild(form);
   
-//     const title = document.createElement('h2')
-//     title.textContent = 'Package Details'
-//     title.classList.add('title')
-//     form.appendChild(title);
-  
-//     // First div
-//     const detailsDiv = document.createElement('div');
-//     detailsDiv.classList.add('details-div');
-//     root.appendChild(detailsDiv);
-  
-//     const nameInput = document.createElement('input');
-//     nameInput.type = 'text';
-//     nameInput.id = 'name';
-//     nameInput.name = 'name';
-//     nameInput.required = true;
-//     nameInput.placeholder = 'Name';
-//     nameInput.classList.add('name-input');
-//     detailsDiv.appendChild(nameInput);
-  
-//     const detailsTextarea = document.createElement('textarea');
-//     detailsTextarea.id = 'details';
-//     detailsTextarea.name = 'details';
-//     detailsTextarea.placeholder = 'Details';
-//     detailsTextarea.classList.add('details-textarea');
-//     detailsDiv.appendChild(detailsTextarea);
-  
-//     // Second div
-//     const dependenciesDiv = document.createElement('div');
-//     dependenciesDiv.classList.add('dependencies-div');
-//     root.appendChild(dependenciesDiv);
-  
-//     const dependenciesTitle = document.createElement("h3");
-//     dependenciesTitle.textContent = 'Package Dependencies';
-//     dependenciesTitle.classList.add('dependencies-title');
-//     dependenciesDiv.appendChild(dependenciesTitle);
-  
-//     // Create a mock list of packages with versions
-//     const packageList = [
-//       { name: 'Package A', version: '1.0.0' },
-//       { name: 'Package B', version: '2.3.1' },
-//       { name: 'Package C', version: '3.1.2' },
-//     ];
-  
-//     const packageListUl = document.createElement('ul');
-//     packageListUl.classList.add('package-list-ul');
-//     for (const packageItem of packageList) {
-//       const li = document.createElement('li');
-//       li.classList.add('package-item');
-//       const label = document.createElement('label');
-//       label.textContent =` ${packageItem.name} - ${packageItem.version}`;
-//       const checkbox = document.createElement('input');
-//       checkbox.type = 'checkbox';
-//       checkbox.name = 'dependencies';
-//       checkbox.value = packageItem.name;
-//       label.prepend(checkbox);
-//       li.appendChild(label);
-//       packageListUl.appendChild(li);
-//       }
-//       dependenciesDiv.appendChild(packageListUl);
-      
-//       // Submit button
-//       const submitButton = document.createElement('button');
-//       submitButton.type = 'submit';
-//       submitButton.textContent = 'Save';
-//       submitButton.classList.add('submit-button');
-//       root.appendChild(submitButton);
-      
-//       form.addEventListener('submit', async (event) => {
-//       event.preventDefault();
-//       const formData = new FormData(event.target);
-//       const response = await fetch(event.target.action, {
-//       method: event.target.method,
-//       body: formData,
-//       });
-//       const data = await response.json();
-//       console.log(data);
-//       });
-//       };
-      
-//       window.addEventListener('load', loadEvent);
+
+
+// Define a function that loads an event
 const loadEvent = () => {
+    // Get the root element and add a class to it
     const root = document.getElementById('root');
     root.classList.add('root');
   
+    // Create a form element and set its attributes
     const form = document.createElement('form');
     form.action = '/edit/package';
     form.method = 'POST';
     form.classList.add('form');
     root.appendChild(form);
   
+    // Create a div element and add a class to it
     const rectangleDiv = document.createElement('div');
     rectangleDiv.classList.add('rectangle-div');
     form.appendChild(rectangleDiv);
   
+    // Define a function that creates and appends elements to the details div
+    const createDetailsDiv = () => {
+      // Create a div element and add a class to it
+      const detailsDiv = document.createElement('div');
+      detailsDiv.classList.add('details-div');
+      rectangleDiv.appendChild(detailsDiv);
   
-    const detailsDiv = document.createElement('div');
-    detailsDiv.classList.add('details-div');
-    rectangleDiv.appendChild(detailsDiv);
+      // Create a title element and add text and a class to it
+      const title = document.createElement('h2');
+      title.textContent = 'Package Details';
+      title.classList.add('title');
+      detailsDiv.appendChild(title);
+  
+      // Create an input element and set its attributes and add a class to it
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.id = 'name';
+      nameInput.name = 'name';
+      nameInput.required = true;
+      nameInput.placeholder = 'Name';
+      nameInput.classList.add('name-input');
+      detailsDiv.appendChild(nameInput);
+  
+      // Create a textarea element and set its attributes and add a class to it
+      const detailsTextarea = document.createElement('textarea');
+      detailsTextarea.id = 'details';
+      detailsTextarea.name = 'details';
+      detailsTextarea.placeholder = 'Details';
+      detailsTextarea.classList.add('details-textarea');
+      detailsDiv.appendChild(detailsTextarea);
+    };
+    createDetailsDiv();
 
+
+    // Define a function that creates and appends elements to the Dependencies Div
+    const createDependenciesDivAndElements = () => {
+
+    // Create a title element and add text and a class to it
     const title = document.createElement('h2');
-    title.textContent = 'Package Details';
-    title.classList.add('title');
-    detailsDiv.appendChild(title);
+    title.textContent = 'PACKAGE DEPENDENCIES';
+    title.classList.add('dependency-title');
+    rectangleDiv.appendChild(title);
+
+    /**
+    * Fetches package data from the server and processes it
+    * @return {Promise<Array>} A promise that resolves to an array of package objects
+    */
+    const fetchData = async () => {
+        try {
+        // Fetch the data from the server
+        const response = await fetch('/jsonData');
+        const data = await response.json();
+    
+        // Process the data and extract the package names and latest versions
+        const packages = data.packages.slice(0, 4);
+        return packages.map((pkg) => {
+            const latestVersion = pkg.releases[pkg.releases.length - 1].version;
+            return {
+            name: pkg.name,
+            version: latestVersion
+            };
+        });
+        } catch (error) {
+        console.error(error);
+        return [];
+        }
+    };
+    
+    /**
+    * Renders the package data as HTML and adds it to the page
+    * @param {Array} packages An array of package objects with 'name' and 'version' properties
+    */
+    const renderPackages = (packages) => {
+    // Create the necessary DOM elements to display the packages
+        const packageDivs = packages.map((pkg) => {
+        const div = document.createElement('div');
+        div.classList.add('package');
   
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.id = 'name';
-    nameInput.name = 'name';
-    nameInput.required = true;
-    nameInput.placeholder = 'Name';
-    nameInput.classList.add('name-input');
-    detailsDiv.appendChild(nameInput);
+        const textName = document.createElement('div');
+        textName.textContent = pkg.name;
   
-    const detailsTextarea = document.createElement('textarea');
-    detailsTextarea.id = 'details';
-    detailsTextarea.name = 'details';
-    detailsTextarea.placeholder = 'Details';
-    detailsTextarea.classList.add('details-textarea');
-    detailsDiv.appendChild(detailsTextarea);
+        const textVersion = document.createElement('div');
+        textVersion.textContent = pkg.version;
   
-    // const submitButton = document.createElement('button');
-    // submitButton.type = 'submit';
-    // submitButton.textContent = 'Save';
-    // submitButton.classList.add('submit-button');
-    // form.appendChild(submitButton);
+        const button = document.createElement('button');
+        button.innerHTML = '&#x2716;';
+        button.classList.add('remove-button');
+        button.addEventListener('click', () => div.remove());
   
-    // form.addEventListener('submit', async (event) => {
-    //   event.preventDefault();
-    //   const formData = new FormData(event.target);
-    //   const response = await fetch(event.target.action, {
-    //     method: event.target.method,
-    //     body: formData,
-    //   });
-    //   const data = await response.json();
-    //   console.log(data);
-    // });
-  };
+        div.appendChild(button);
+        div.appendChild(textName);
+        div.appendChild(textVersion);
+        return div;
+        });
   
-  window.addEventListener('load', loadEvent);
+    // Add the package elements to the page
+
+    // Create a div element and add a class to it
+
+    // const dependencyDiv = document.querySelector('#dependency-div');
+    const dependencyDiv = document.createElement('div');
+    dependencyDiv.classList.add('dependency-div');
+    rectangleDiv.appendChild(dependencyDiv);
+    dependencyDiv.innerHTML = '';
+    packageDivs.forEach((div) => {
+        dependencyDiv.appendChild(div);
+    });
+  
+    // Add a search input to the page
+    const dependencySearchInput = document.createElement('input');
+    dependencySearchInput.type = 'text';
+    dependencySearchInput.placeholder = 'Dependency search';
+    dependencySearchInput.classList.add('dependencySearch-input');
+    dependencyDiv.appendChild(dependencySearchInput);
+    };
+  
+    /**
+    * Loads the package data and renders it on the page
+    */
+    const loadPackages = async () => {
+    // Fetch the package data and render it on the page
+    const packages = await fetchData();
+    renderPackages(packages);
+    
+    };
+    loadPackages()
+    };
+    createDependenciesDivAndElements();
+    
+
+    // Define a function that creates and appends elements to the versions Div
+   /**
+ * Creates the package version elements and adds them to the page
+ * @param {Array} packages - An array of package objects containing information about each package
+ * @returns {undefined}
+ */
+const createPackageVersionDivAndElements = () => {
+
+    // Create the title element and add it to the rectangle div
+    const title = document.createElement("h2")
+    title.textContent = 'PACKAGE VERSIONS'
+    title.classList.add("packageVersion-title")
+    rectangleDiv.appendChild(title);
+    
+    // Function to render the package versions on the page
+    const renderPackages = () => {
+        const packages = [
+            {
+              id: 1,
+              name: 'Package A',
+              releases: [
+                {
+                  date: '2022-03-01',
+                  version: '1.0.0',
+                },
+                {
+                  date: '2022-04-01',
+                  version: '1.1.0',
+                },
+                {
+                  date: '2022-05-01',
+                  version: '1.2.0',
+                },
+              ],
+            },
+            {
+              id: 2,
+              name: 'Package B',
+              releases: [
+                {
+                  date: '2022-03-01',
+                  version: '2.0.0',
+                },
+                {
+                  date: '2022-04-01',
+                  version: '2.1.0',
+                },
+                {
+                  date: '2022-05-01',
+                  version: '2.2.0',
+                },
+              ],
+            },
+          ];
+        const packageDivs = [];
+        const packageId = 1;
+        const packageObj = packages.find(pkg => pkg.id === packageId);
+
+        // If package exists, create elements for each release and push them to packageDivs array
+        if (packageObj) {
+            packageObj.releases.forEach((release) => {
+                const div = document.createElement('div');
+                div.classList.add('package');
+
+                const textVersion = document.createElement('div');
+                textVersion.textContent = release.version;
+
+                const textDate = document.createElement('div');
+                textDate.textContent = release.date;
+
+                const button = document.createElement('button');
+                button.innerHTML = '&#x2716;';
+                button.classList.add('remove-button');
+                button.addEventListener('click', () => div.remove());
+
+                div.appendChild(button);
+                div.appendChild(textVersion);
+                div.appendChild(textDate);
+                packageDivs.push(div);
+            });
+        }
+
+        return packageDivs;
+    };
+
+    // Add the package version elements to the page
+    const packageVersionDiv = document.createElement('div');
+    packageVersionDiv.classList.add('packageVersion-div');
+    rectangleDiv.appendChild(packageVersionDiv);
+    packageVersionDiv.innerHTML = '';
+    renderPackages().forEach((div) => {
+        packageVersionDiv.appendChild(div);
+    });
+
+    // Add elements for adding new package versions
+    const addPackageVersionButton = document.createElement('button');
+    addPackageVersionButton.innerHTML = '&#x2b;';
+    addPackageVersionButton.classList.add('addVersion-button');
+
+    const addPackageVersionInput = document.createElement('input');
+    addPackageVersionInput.type = 'text';
+    addPackageVersionInput.placeholder = 'Enter version details';
+    addPackageVersionInput.classList.add('version-Input')
+    addPackageVersionButton.addEventListener('click', () => {
+        const versionDetails = addPackageVersionInput.value;
+        if (versionDetails) {
+            const [version, date] = versionDetails.split(',').map(str => str.trim());
+
+            const packageObj = packages.find(pkg => pkg.id === 1);
+            if (packageObj) {
+                packageObj.releases.push({ version, date });
+                const newPackageDiv = renderPackages()[packageObj.releases.length - 1];
+                packageVersionDiv.appendChild(newPackageDiv);
+            }
+        }
+    });
+    packageVersionDiv.appendChild(addPackageVersionButton);
+    packageVersionDiv.appendChild(addPackageVersionInput);
+};
+    createPackageVersionDivAndElements();
+    
+    
+
+};  
+  
+window.addEventListener('load', loadEvent);
   
