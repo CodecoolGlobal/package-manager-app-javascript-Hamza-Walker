@@ -214,7 +214,84 @@ body {
   border-bottom:  1px solid #CCCCCC;
 }
 
-/* #rectangle-div .addVersion-button{
+/* Save Package button */
+/* Save Button */
+.savePackage-button {
+  position: absolute;
+  left: 9.5%;
+  right: 37.5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  /* Text */
+  position: absolute;
+  height: 50px;
+  width: 190px;
+  
+  top: calc(50% - 46px);
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.3em;
+
+  color: #FFFFFF;
+
+  background-color: #000000;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Delete Button */
+.deletePackage-button {
+  position: absolute;
+  left: 37.5%;
+  right: 37.5%;
+  bottom: 7.72%;
+  z-index: 1;
+
+  /* Text */
+  position: absolute;
+  height: 22px;
+  left: 16px;
+  right: 24px;
+  top: calc(50% - 0px);
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.3em;
+
+  color: #000000;
+
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.package-buttons {
+  bottom:  163px;
+  right: 10px;
+  position: absolute;
+  left: 260px;
+  transform: translate(-50%, -50%);
+}
+#rectangle-div .addVersion-button{
   width: 24px;
   height: 24px;
   background-color: transparent;
@@ -244,4 +321,4 @@ body {
   border: 1px solid #000000;
   border-radius: 5px;
 
-} */
+}

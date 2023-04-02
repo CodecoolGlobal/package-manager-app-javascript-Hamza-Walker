@@ -1,19 +1,14 @@
 const express = require("express");
-const fs = require("fs");
-const dataRoute = "./pkgs.json";
 const path = require("path");
-
-
-const jsonData = JSON.parse(fs.readFileSync('pkgs.json','utf-8'));
-// console.log(jsonData);
+const fs = require('fs')
+const jsonData = require('./pkgs.json');
+const dataRoute = "./pkgs.json"; // Define the variable here
 
 const app = express();
 
 app.get('/jsonData', (req, res) => {
   res.json(jsonData);
 });
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,12 +18,27 @@ const port = 9002;
 app.get("/", (req, res) => {
   res.redirect(301, '/edit/package');
 });
+
 app.get(["/edit/package","/edit/package/:id"], (req, res, next) => {
-  res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
-app.use('/public', express.static(`${__dirname}/../frontend/public`));
 
-app.use('/pkgs.json', express.static(`${__dirname}pkgs.json`));
+app.post('/savePackage', (req, res) => {
+  const updatedSchema = req.body;
+  console.log(updatedSchema)
 
+  // fs.writeFile(dataRoute, JSON.stringify(packageSchema), (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.status(500).send("Error saving package schema to file.");
+  //   } else {
+  //     console.log("Package schema saved successfully!");
+  //     res.status(200).send("Package schema saved successfully!");
+  //   }
+  // });
+});
 
-app.listen(port, _ => console.log(`http://127.0.0.1:${port}`));
+app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
+app.use('/pkgs.json', express.static(path.join(__dirname, './pkgs.json')));
+
+app.listen(port, () => console.log(`http://127.0.0.1:${port}`));
