@@ -24,18 +24,18 @@ app.get(["/edit/package","/edit/package/:id"], (req, res, next) => {
 });
 
 app.post('/savePackage', (req, res) => {
-  const updatedSchema = req.body;
-  console.log(updatedSchema)
+  const packageSchema = req.body;
+  console.log(req.body)
 
-  // fs.writeFile(dataRoute, JSON.stringify(packageSchema), (err) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.status(500).send("Error saving package schema to file.");
-  //   } else {
-  //     console.log("Package schema saved successfully!");
-  //     res.status(200).send("Package schema saved successfully!");
-  //   }
-  // });
+  fs.writeFile(dataRoute, JSON.stringify(packageSchema), (err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error saving package schema to file.");
+    } else {
+      console.log("Package schema saved successfully!");
+      res.status(200).send("Package schema saved successfully!");
+    }
+  });
 });
 
 app.use('/public', express.static(path.join(__dirname, '../frontend/public')));
